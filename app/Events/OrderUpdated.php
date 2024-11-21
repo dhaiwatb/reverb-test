@@ -9,6 +9,7 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
 class OrderUpdated
 {
@@ -20,6 +21,7 @@ class OrderUpdated
      */
     public function __construct($order)
     {
+        Log::info('OrderUpdated', collect($order)->toArray());
         $this->order = $order;
     }
 
@@ -33,12 +35,15 @@ class OrderUpdated
         // return [
         //     new PrivateChannel('channel-name'),
         // ];
+        // dd(2);
+        Log::info('broadcastOn', $this->order);
 
         return ['orders'];
     }
 
     public function broadcastAs()
     {
+        Log::info('broadcastAs', $this->order);
         return 'order.updated';
     }
 }
