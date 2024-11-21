@@ -28,6 +28,7 @@ window.Echo = new Echo({
     wssPort: 6001,
     forceTLS: false,
     disableStats: true,
+    enabledTransports: ['ws', 'wss'],
 });
 
 // Listen for an event
